@@ -12,8 +12,14 @@ async function cat(path) {
 }
 
 async function webCat(path){
-  const resp = await axios.get(path);
-  console.log(resp.data.slice(0,100), "...");
+  try{
+    const resp = await axios.get(url);
+    console.log(resp.data.slice(0,100), "...")
+    return resp.data;
+  } catch (err) {
+    console.error(`Error fetching ${url}: ${err}`);
+    process.exit(1);
+  }
 }
 
 let path = process.argv[2];
